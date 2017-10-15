@@ -1,0 +1,259 @@
+/*
++-------------+
+| SMART PHONE |
++-------------+
+*/
+
+/*
+Prevent all HTML elements from expanding
+when a padding or a border is assigned to 
+any HTML element. */
+* {
+    box-sizing: border-box;
+}
+
+/*
+Eventually, <div class="col"> will be floated
+and <div class="row"> will collapse when that happens.
+So let's prepare the clearfix! */
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/*
+Removing default margin and setting a font-stack */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+}
+
+
+.narrow-tablet,
+.wide-tablet,
+.narrow-desktop,
+.wide-desktop {
+    display: none;
+}
+
+h1 {
+    text-align: center;
+    color: cornflowerblue;
+}
+
+/*
+<div class="container"> wraps entire 
+main content! */
+.container {
+    max-width: 100rem;
+    min-width: 28rem;
+    margin: 2rem;
+}
+
+/*
+1rem of margin-bottom for <div class="row"> 
+makes a horizontal gutter of white space
+between 2 rows! */
+.row {
+    background-color: #666;
+    margin: 0 0 1rem 0;
+    padding: 1rem;
+}
+
+/*
+<div class="col"> are children of <div class="row">
+These are the containers that will store your 
+content <p>, <ul>, <img>, ...
+In mobile view, every <div class="col"> will take 
+a 100% of view-port width, so you need a margin-bottom 
+for every <div class="col"> to create a horizontal 
+gutter of white space between 2 cols! */
+.col {
+    text-align: center;
+    background-color: #EEE;
+    color: #666;
+    padding: 1rem;
+    margin: 0 0 1rem 0;
+    transition: 600ms all ease-in;
+}
+
+/*
+Only the last <div class="col"> in <div class="row">
+doesn't need margin-bottom. */
+.col:last-child {
+    margin: 0;
+}
+
+
+
+
+/*
++------------------------------+
+| ADJUSTMENT FOR NARROW TABLET |
++------------------------------+
+*/
+@media all and (min-width: 45rem) {
+    
+    .mobile {
+        display: none;
+    }
+    
+    .narrow-tablet {
+        display: inline;
+    }
+    
+    /*
+    Floating left all of your <div class="col"> 
+    will cause <div class="row"> to collapse.
+    To prevent that, >>.clearfix<< is added as additional 
+    class to all <div class="row"> (see your HTML). All
+    <div class="col"> will eventually stack in 1 row, so I
+    assign them 1rem of margin-right - this will cretate 
+    a vertical gutter of white space between 2 <div class="col"> */
+    .col {
+        float: left;
+        margin: 0 1rem 0 0;
+    }
+    
+    /*
+    If <div class="row"> contains only 1 <div class="col">,
+    make sure that <div class="col"> takes 100% of view-port
+    width. To target that specific element, I added
+    additional class to <div class="col"> and now it looks like:
+    <div class="col col-1">*/
+    .col-1 {
+        width: 100%;
+    }
+
+    /*
+    If <div class="row"> contains 2 <div class="col">,
+    make sure that each <div class="col"> takes 50% of view-port-width. 
+    To target that specific element, I added additional class to <div class="col"> 
+    and now it looks like: <div class="col col-2">.
+    1rem of added margin-right is subtracted from 50% the element-width. 
+    Last element doesn't have margin-right which means you subtracted more 
+    than you should. Divide that last 1rem by 2 and add the gotten quotient 
+    back to the width of <div class="col col-2">. */
+    .col-2 {
+        width: calc(50% - 1rem + 0.5rem);
+    }
+    
+    /*
+    If <div class="row"> contains 3, 4 or 5 <div class="col">,
+    make sure these <div class="col"> are not floated at
+    this screen-width. As block-level elements, they will
+    expand to 100% of view-port-width, and they will still 
+    need 1rem of margin-bottom (creating the horizontal gutter of
+    white space between 2 <div class="col">). */
+    .col-3, 
+    .col-4, 
+    .col-5 {
+        float: none;
+        margin: 0 0 1rem 0;
+    }
+}
+
+
+
+/*
++----------------------------+
+| ADJUSTMENT FOR WIDE TABLET |
++----------------------------+
+*/
+@media all and (min-width: 60rem) {
+    
+    .narrow-tablet {
+        display: none;
+    }
+    
+    .wide-tablet {
+        display: inline;
+    }
+    
+    /*
+    If <div class="row"> contains 3 <div class="col">,
+    make sure that each <div class="col"> takes 33.33% of view-port-width. 
+    To target that specific element, I added additional class to <div class="col"> 
+    and now it looks like: <div class="col col-3">
+    1rem of added margin-right is subtracted from 33.33% the element-width. 
+    Last element doesn't have margin-right which means you subtracted more 
+    than you should. Divide that last 1rem by 3 and add the gotten quotient 
+    back to the width of <div class="col col-3">.*/
+    .col-3 {
+        width: calc(33.33% - 1rem + 0.33rem);
+        float: left;
+        margin: 0 1rem 0 0;
+    }
+}
+
+
+
+/*
++-------------------------------+
+| ADJUSTMENT FOR NARROW DESKTOP |
++-------------------------------+
+*/
+@media all and (min-width: 80rem) {
+    
+    .wide-tablet {
+        display: none;
+    }
+    
+    .narrow-desktop {
+        display: inline;
+    }
+    
+    /*
+    If <div class="row"> contains 4 <div class="col">,
+    make sure that each <div class="col"> takes 25% of view-port-width. 
+    To target that specific element, I added additional class to <div class="col"> 
+    and now it looks like: <div class="col col-4">
+    1rem of added margin-right is subtracted from 25% the element-width. 
+    Last element doesn't have margin-right which means you subtracted more 
+    than you should. Divide that last 1rem by 4 and add the gotten quotient 
+    back to the width of <div class="col col-4">.*/
+    .col-4 {
+        width: calc(25% - 1rem + 0.25rem);
+        float: left;
+        margin: 0 1rem 0 0;
+    }
+}
+
+
+
+/*
++-----------------------------+
+| ADJUSTMENT FOR WIDE DESKTOP |
++-----------------------------+
+*/
+@media all and (min-width: 104rem) {
+    
+    .narrow-desktop {
+        display: none;
+    }
+    
+    .wide-desktop {
+        display: inline;
+    }
+    
+    .container {
+        margin: 2rem auto;
+    }
+    
+    /*
+    If <div class="row"> contains 5 <div class="col">,
+    make sure that each <div class="col"> takes 20% of view-port-width. 
+    To target that specific element, I added additional class to <div class="col"> 
+    and now it looks like: <div class="col col-5">
+    1rem of added margin-right is subtracted from 20% the element-width. 
+    Last element doesn't have margin-right which means you subtracted more 
+    than you should. Divide that last 1rem by 5 and add the gotten quotient 
+    back to the width of <div class="col col-5">.*/
+    .col-5 {
+        width: calc(20% - 1rem + 0.2rem);
+        float: left;
+        margin: 0 1rem 0 0;
+    }
+}

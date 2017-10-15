@@ -1,0 +1,148 @@
+/*
+Prevent all HTML elements from expanding
+when a padding or a border is assigned to 
+any HTML element. */
+* {
+    box-sizing: border-box;
+}
+
+/*
+<div class="col"> will be floated
+and <div class="row"> will collapse when that happens.
+So let's prepare the clearfix! */
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/*
+Removing default margin and setting a font-stack */
+body {
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: cornflowerblue;
+}
+
+span {
+    color: cornflowerblue;
+    font-weight: bold;
+}
+
+/*
+<div class="container"> wraps entire 
+main content! */
+.container {
+    max-width: 80rem;
+    min-width: 45rem;
+    margin: 2rem;
+}
+
+/*
+1rem of margin-bottom for <div class="row"> 
+makes a horizontal gutter of white space
+between 2 rows! */
+.row {
+    background-color: #666;
+    margin: 0 0 1rem 0;
+    padding: 1rem;
+}
+
+/*
+Floating left all of your <div class="col"> 
+will cause <div class="row"> to collapse.
+To prevent that, >>.clearfix<< is added as additional 
+class to all <div class="row"> (see your HTML). All
+<div class="col"> will eventually stack in 1 row, so I
+assign them 1rem of margin-right - this will cretate 
+a vertical gutter of white space between 2 <div class="col"> */
+.col {
+    background-color: #EEE;
+    text-align: center;
+    color: #666;
+    padding: 1rem;
+    margin: 0 1rem 0 0;
+    float: left;
+}
+
+/*
+Only the last <div class="col"> in <div class="row">
+doesn't need margin-right. */
+.col:last-child {
+    margin: 0;
+}
+
+/*
+If <div class="row"> contains only 1 <div class="col">,
+make sure that <div class="col"> takes 100% of view-port
+width. To target that specific element, I added
+additional class to <div class="col"> and now it looks like:
+<div class="col col-1"> */
+.col-1 {
+    width: 100%;
+}
+
+/*
+If <div class="row"> contains 2 <div class="col">,
+make sure that each <div class="col"> takes 50% of view-port-width. 
+To target that specific element, I added additional class to <div class="col"> 
+and now it looks like: <div class="col col-2">.
+1rem of added margin-right is subtracted from 50% the element-width. 
+Last element doesn't have margin-right which means you subtracted more 
+than you should. Divide that last 1rem by 2 and add the gotten quotient 
+back to the width of <div class="col col-2">. */
+.col-2 {
+    width: calc(50% - 1rem + 0.5rem);
+}
+
+/*
+If <div class="row"> contains 3 <div class="col">,
+make sure that each <div class="col"> takes 33.33% of view-port-width. 
+To target that specific element, I added additional class to <div class="col"> 
+and now it looks like: <div class="col col-3">
+1rem of added margin-right is subtracted from 33.33% the element-width. 
+Last element doesn't have margin-right which means you subtracted more 
+than you should. Divide that last 1rem by 3 and add the gotten quotient 
+back to the width of <div class="col col-3">.*/
+.col-3 {
+    width: calc(33.33% - 1rem + 0.33rem);
+}
+
+/*
+If <div class="row"> contains 4 <div class="col">,
+make sure that each <div class="col"> takes 25% of view-port-width. 
+To target that specific element, I added additional class to <div class="col"> 
+and now it looks like: <div class="col col-4">
+1rem of added margin-right is subtracted from 25% the element-width. 
+Last element doesn't have margin-right which means you subtracted more 
+than you should. Divide that last 1rem by 4 and add the gotten quotient 
+back to the width of <div class="col col-4">.*/
+.col-4 {
+    width: calc(25% - 1rem + 0.25rem);
+}
+
+/*
+If <div class="row"> contains 5 <div class="col">,
+make sure that each <div class="col"> takes 20% of view-port-width. 
+To target that specific element, I added additional class to <div class="col"> 
+and now it looks like: <div class="col col-5">
+1rem of added margin-right is subtracted from 20% the element-width. 
+Last element doesn't have margin-right which means you subtracted more 
+than you should. Divide that last 1rem by 5 and add the gotten quotient 
+back to the width of <div class="col col-5">.*/
+.col-5 {
+    width: calc(20% - 1rem + 0.2rem);
+}
+
+
+
+@media all and (min-width: 84rem) {
+    .container {
+        margin: 2rem auto;
+    }
+}
